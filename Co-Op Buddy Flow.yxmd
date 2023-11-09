@@ -1,0 +1,1752 @@
+<?xml version="1.0"?>
+<AlteryxDocument yxmdVer="2023.1">
+  <Nodes>
+    <Node ToolID="123">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="809" y="234" width="1195" height="306" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Merging With Conference Data</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="8">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+            <Position x="1026" y="283" />
+          </GuiSettings>
+          <Properties>
+            <Configuration joinByRecordPos="False">
+              <JoinInfo connection="Left">
+                <Field field="Destination Airport" />
+              </JoinInfo>
+              <JoinInfo connection="Right">
+                <Field field="Ideal Airport Code" />
+              </JoinInfo>
+              <SelectConfiguration>
+                <Configuration outputConnection="Join">
+                  <OrderChanged value="False" />
+                  <CommaDecimal value="False" />
+                  <SelectFields>
+                    <SelectField field="Left_Office City" selected="True" rename="Departure_City" input="Left_" />
+                    <SelectField field="Left_Departing City &amp; State" selected="False" input="Left_" />
+                    <SelectField field="Left_Destination City &amp;State" selected="False" input="Left_" />
+                    <SelectField field="Left_Departing City" selected="False" input="Left_" />
+                    <SelectField field="Left_Dept_DateTime" selected="False" input="Left_" />
+                    <SelectField field="Left_Arr_DateTime" selected="False" input="Left_" />
+                    <SelectField field="Right_Address" selected="False" input="Right_" />
+                    <SelectField field="Right_City" selected="True" rename="Conference_City " input="Right_" />
+                    <SelectField field="Right_State" selected="False" input="Right_" />
+                    <SelectField field="Right_ZIP" selected="False" rename="Right_ZIP" input="Right_" />
+                    <SelectField field="Right_Ideal Airport Code" selected="False" input="Right_" />
+                    <SelectField field="*Unknown" selected="True" />
+                  </SelectFields>
+                </Configuration>
+              </SelectConfiguration>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+        </Node>
+        <Node ToolID="9">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+            <Position x="834" y="330" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Passwords />
+              <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="25">C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Conference Center Data$`</File>
+              <FormatSpecificOptions>
+                <FirstRowData>False</FirstRowData>
+                <ImportLine>1</ImportLine>
+              </FormatSpecificOptions>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>DATA.xlsx
+Query=`Conference Center Data$`</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <Dependencies>
+              <Implicit />
+            </Dependencies>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Conference Center" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Conference Center Data$`" type="V_String" />
+                <Field name="Address" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Conference Center Data$`" type="V_String" />
+                <Field name="City" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Conference Center Data$`" type="V_String" />
+                <Field name="State" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Conference Center Data$`" type="V_String" />
+                <Field name="ZIP" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Conference Center Data$`" type="Double" />
+                <Field name="Hotel Room Price" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Conference Center Data$`" type="Double" />
+                <Field name="Discounted Hotel Room Price" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Conference Center Data$`" type="Double" />
+                <Field name="Maximum Occupancy" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Conference Center Data$`" type="Double" />
+                <Field name="Catered Breakfast Cost per Attendee" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Conference Center Data$`" type="Double" />
+                <Field name="Catered Lunch Cost per Attendee" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Conference Center Data$`" type="Double" />
+                <Field name="Catered Dinner Cost per Attendee" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Conference Center Data$`" type="Double" />
+                <Field name="Ideal Airport Code" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Conference Center Data$`" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+        </Node>
+        <Node ToolID="12">
+          <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+            <Position x="1122" y="355" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <SummarizeFields>
+                <SummarizeField field="Conference Center" action="GroupBy" rename="Conference Center" />
+                <SummarizeField field="Name" action="CountDistinct" rename="CountDistinct_Name" />
+              </SummarizeFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+        </Node>
+        <Node ToolID="13">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+            <Position x="1218" y="295" />
+          </GuiSettings>
+          <Properties>
+            <Configuration joinByRecordPos="False">
+              <JoinInfo connection="Left">
+                <Field field="Conference Center" />
+              </JoinInfo>
+              <JoinInfo connection="Right">
+                <Field field="Conference Center" />
+              </JoinInfo>
+              <SelectConfiguration>
+                <Configuration outputConnection="Join">
+                  <OrderChanged value="False" />
+                  <CommaDecimal value="False" />
+                  <SelectFields>
+                    <SelectField field="Right_Conference Center" selected="True" rename="Right_Conference Center" input="Right_" />
+                    <SelectField field="*Unknown" selected="True" />
+                  </SelectFields>
+                </Configuration>
+              </SelectConfiguration>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+        </Node>
+        <Node ToolID="15">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="1314" y="295" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="IF [CountDistinct_Name] &gt;= 0.75*[Maximum Occupancy] &#xA;THEN&#xA;[Discounted Hotel Room Price]+[Catered Breakfast Cost per Attendee]+[Catered Lunch Cost per Attendee]+[Catered Dinner Cost per Attendee]+[Bill Rate]+[Avg_MARKET_FARE]&#xA;ELSE &#xA;[Hotel Room Price]+[Catered Breakfast Cost per Attendee]+[Catered Lunch Cost per Attendee]+[Catered Dinner Cost per Attendee]+[Bill Rate]+[Avg_MARKET_FARE]&#xA;ENDIF" field="Total_Cost" size="4" type="Int32" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>Total_Cost = IF [CountDistinct_Name] &gt;= 0.75*[Maximum Occupancy] 
+THEN
+[Discount...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="16">
+          <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+            <Position x="1686" y="295" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <SummarizeFields>
+                <SummarizeField field="Conference Center" action="GroupBy" rename="Conference Center" />
+                <SummarizeField field="Conference_City " action="GroupBy" rename="Conference_City " />
+                <SummarizeField field="Min_Total_Cost" action="Sum" rename="Sum_Min_Total_Cost" />
+                <SummarizeField field="Min_Travel Time in Minutes" action="Avg" rename="Avg_Min_Travel Time in Minutes" />
+                <SummarizeField field="Name" action="Count" rename="Numer of People" />
+              </SummarizeFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+        </Node>
+        <Node ToolID="17">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Sort.Sort">
+            <Position x="1794" y="295" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <SortInfo locale="1033">
+                <Field field="Sum_Min_Total_Cost" order="Ascending" />
+                <Field field="Avg_Min_Travel Time in Minutes" order="Ascending" />
+              </SortInfo>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>Sum_Min_Total_Cost - Ascending
+Avg_Min_Travel Time in Minutes - Ascending</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSort" />
+        </Node>
+        <Node ToolID="94">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="1446" y="295" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Travel Time in Minutes" selected="True" type="Int16" size="2" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="95">
+          <GuiSettings Plugin="AlteryxSpatialPluginsGui.Summarize.Summarize">
+            <Position x="1590" y="295" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <SummarizeFields>
+                <SummarizeField field="Name" action="GroupBy" rename="Name" />
+                <SummarizeField field="Conference Center" action="GroupBy" rename="Conference Center" />
+                <SummarizeField field="Conference_City " action="GroupBy" rename="Conference_City " />
+                <SummarizeField field="Total_Cost" action="Min" rename="Min_Total_Cost" />
+                <SummarizeField field="Travel Time in Minutes" action="Min" rename="Min_Travel Time in Minutes" />
+              </SummarizeFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxSpatialPluginsEngine.dll" EngineDllEntryPoint="AlteryxSummarize" />
+        </Node>
+        <Node ToolID="129">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="1674" y="391" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Travel &amp; Facilities cost for each conference location</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="130">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+            <Position x="942" y="318" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Expression>[Maximum Occupancy] &gt;=1560</Expression>
+              <Mode>Custom</Mode>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>[Maximum Occupancy] &gt;=1560</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+        </Node>
+        <Node ToolID="131">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="930" y="426" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text><![CDATA[Ensuring to consider conference locations which can accommodate 1560 people :  Assuming 85% of Associates, Senior Associates, and Supervisors will be able to attend and 99% of Presenters will be able to attend
+]]></Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="132">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileOutput.DbFileOutput">
+            <Position x="1878" y="295" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <File MaxRecords="" FileFormat="25">C:\Users\antar\OneDrive\Documents\HackTX\Final Output.xlsx|||Sheet1</File>
+              <Passwords />
+              <Disable>False</Disable>
+              <FormatSpecificOptions>
+                <PreserveFormat>True</PreserveFormat>
+                <SkipFieldNames>False</SkipFieldNames>
+                <OutputOption>RemoveFile</OutputOption>
+              </FormatSpecificOptions>
+              <MultiFile value="False" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>Final Output.xlsx
+Query=Sheet1</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <Dependencies>
+              <Implicit />
+            </Dependencies>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileOutput" />
+        </Node>
+        <Node ToolID="133">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="1122" y="415" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Checking possible occupancy of a conference center</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="134">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="1314" y="475" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Calculating expected total cost for each potential venue for each person</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="128">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="1554" y="367" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Complete travel + facilities costs for each individual’s home to the conference location</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="136">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="1794" y="439" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Sorting in ascending order on minimum total expenses to attend , and minimum avg travel time to a conference  center , for all the employees</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="122">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="54" y="54" width="756" height="349" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption>Merging office locations</Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="2">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+            <Position x="79" y="103" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Passwords />
+              <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="25">C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`US Tax People$`</File>
+              <FormatSpecificOptions>
+                <FirstRowData>False</FirstRowData>
+                <ImportLine>1</ImportLine>
+              </FormatSpecificOptions>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>DATA.xlsx
+Query=`US Tax People$`</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <Dependencies>
+              <Implicit />
+            </Dependencies>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Name" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`US Tax People$`" type="V_String" />
+                <Field name="Level" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`US Tax People$`" type="V_String" />
+                <Field name="Office" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`US Tax People$`" type="V_String" />
+                <Field name="Bill Rate" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`US Tax People$`" type="Double" />
+                <Field name="Presenter" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`US Tax People$`" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+        </Node>
+        <Node ToolID="3">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.TextToColumns.TextToColumns">
+            <Position x="294" y="115" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Field>Office</Field>
+              <ErrorHandling>Last</ErrorHandling>
+              <RootName>Office</RootName>
+              <Delimeters value="," />
+              <NumFields value="2" />
+              <Flags value="0" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextToColumns" />
+        </Node>
+        <Node ToolID="4">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+            <Position x="91" y="272" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Passwords />
+              <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="25">C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Office Locations$`</File>
+              <FormatSpecificOptions>
+                <FirstRowData>False</FirstRowData>
+                <ImportLine>1</ImportLine>
+              </FormatSpecificOptions>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>DATA.xlsx
+Query=`Office Locations$`</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <Dependencies>
+              <Implicit />
+            </Dependencies>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Address Line1" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Office Locations$`" type="V_String" />
+                <Field name="Address Line2" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Office Locations$`" type="V_String" />
+                <Field name="Office City" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Office Locations$`" type="V_String" />
+                <Field name="Office State" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Office Locations$`" type="V_String" />
+                <Field name="ZIP" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Office Locations$`" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+        </Node>
+        <Node ToolID="5">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+            <Position x="582" y="259" />
+          </GuiSettings>
+          <Properties>
+            <Configuration joinByRecordPos="False">
+              <JoinInfo connection="Left">
+                <Field field="Office1" />
+              </JoinInfo>
+              <JoinInfo connection="Right">
+                <Field field="Office City" />
+              </JoinInfo>
+              <SelectConfiguration>
+                <Configuration outputConnection="Join">
+                  <OrderChanged value="False" />
+                  <CommaDecimal value="False" />
+                  <SelectFields>
+                    <SelectField field="Left_Presenter" selected="False" input="Left_" />
+                    <SelectField field="Left_Office1" selected="True" rename="Office City" input="Left_" />
+                    <SelectField field="Left_Office2" selected="False" input="Left_" />
+                    <SelectField field="Right_Address Line1" selected="False" input="Right_" />
+                    <SelectField field="Right_Address Line2" selected="False" input="Right_" />
+                    <SelectField field="Right_Office City" selected="False" rename="Right_Office City" input="Right_" />
+                    <SelectField field="Right_Office State" selected="False" rename="Right_Office State" input="Right_" />
+                    <SelectField field="Right_ZIP" selected="False" input="Right_" />
+                    <SelectField field="*Unknown" selected="True" />
+                  </SelectFields>
+                </Configuration>
+              </SelectConfiguration>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+        </Node>
+        <Node ToolID="10">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+            <Position x="187" y="127" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Expression>[Presenter] = "x" or [Level] = "Associate" or [Level] = "Senior Associate" or [Level] = "Supervisor"</Expression>
+              <Mode>Custom</Mode>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>[Presenter] = "x" or [Level] = "Associate" or [Level] = "Senior Associate" or [L...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+        </Node>
+        <Node ToolID="1">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+            <Position x="726" y="259" />
+          </GuiSettings>
+          <Properties>
+            <Configuration joinByRecordPos="False">
+              <JoinInfo connection="Left">
+                <Field field="Office City" />
+              </JoinInfo>
+              <JoinInfo connection="Right">
+                <Field field="Departing City" />
+              </JoinInfo>
+              <SelectConfiguration>
+                <Configuration outputConnection="Join">
+                  <OrderChanged value="False" />
+                  <CommaDecimal value="False" />
+                  <SelectFields>
+                    <SelectField field="Left_Office" selected="False" input="Left_" />
+                    <SelectField field="Right_Destination City" selected="False" input="Right_" />
+                    <SelectField field="Right_State" selected="True" rename="Right_State" input="Right_" />
+                    <SelectField field="Right_Right_State" selected="True" rename="Right_Right_State" input="Right_" />
+                    <SelectField field="Right_Airline Code" selected="False" input="Right_" />
+                    <SelectField field="Right_Airline" selected="False" input="Right_" />
+                    <SelectField field="Right_Departing City1" selected="False" rename="Departure_City" input="Right_" />
+                    <SelectField field="Right_Departing City2" selected="False" input="Right_" />
+                    <SelectField field="Left_Address Line1" selected="False" input="Left_" />
+                    <SelectField field="Left_Address Line2" selected="False" input="Left_" />
+                    <SelectField field="Left_ZIP" selected="False" input="Left_" />
+                    <SelectField field="Right_Departing_City" selected="False" input="Right_" />
+                    <SelectField field="Right_Departing_State" selected="False" input="Right_" />
+                    <SelectField field="*Unknown" selected="True" />
+                  </SelectFields>
+                </Configuration>
+              </SelectConfiguration>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+        </Node>
+        <Node ToolID="145">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.FindReplace.FindReplace">
+            <Position x="426" y="163" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FieldFind>Office1</FieldFind>
+              <FieldSearch>Field1</FieldSearch>
+              <ReplaceFoundField>Field2</ReplaceFoundField>
+              <FindMode>FindBegin</FindMode>
+              <NoCase value="False" />
+              <MatchWholeWord value="False" />
+              <ReplaceMode>Replace</ReplaceMode>
+              <ReplaceMultipleFound value="True" />
+              <ReplaceAppendFields />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFindReplace" />
+        </Node>
+        <Node ToolID="146">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.TextInput.TextInput">
+            <Position x="342" y="187" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <NumRows value="1" />
+              <Fields>
+                <Field name="Field1" />
+                <Field name="Field2" />
+              </Fields>
+              <Data>
+                <r>
+                  <c>St Petersburg</c>
+                  <c>St. Petersburg</c>
+                </r>
+              </Data>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextInput" />
+        </Node>
+        <Node ToolID="147">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="438" y="115" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text><![CDATA[Data Cleaning- Converting St Petersburg to St. Petersburg
+]]></Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="148">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="678" y="175" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Joining office location and people data with airport data for flights which have departure time between 18:00:00 and 23:59:59</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="149">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.TextToColumns.TextToColumns">
+            <Position x="630" y="223" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Field>Departing City</Field>
+              <Delimeters value="/" />
+              <NumFields value="1" />
+              <Flags value="0" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextToColumns" />
+        </Node>
+      </ChildNodes>
+    </Node>
+    <Node ToolID="121">
+      <GuiSettings Plugin="AlteryxGuiToolkit.ToolContainer.ToolContainer">
+        <Position x="55" y="510" width="1809" height="485" />
+      </GuiSettings>
+      <Properties>
+        <Configuration>
+          <Caption><![CDATA[Finding Time Difference and Time Zone ]]></Caption>
+          <Style TextColor="#314c4a" FillColor="#ecf2f2" BorderColor="#314c4a" Transparency="25" Margin="25" />
+          <Disabled value="False" />
+          <Folded value="False" />
+        </Configuration>
+        <Annotation DisplayMode="0">
+          <Name />
+          <DefaultAnnotationText />
+          <Left value="False" />
+        </Annotation>
+      </Properties>
+      <ChildNodes>
+        <Node ToolID="97">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="537" y="751" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="&#xA;if Length([Departure Time]) = 3 then  &quot;0&quot; + Left([Departure Time], 1) + &quot;:&quot; + Right([Departure Time], 2) + &quot;:00&quot; elseif&#xA;&#xA;Length([Departure Time]) = 4 then Left([Departure Time], 2) + &quot;:&quot; + Right([Departure Time], 2) + &quot;:00&quot;  elseif&#xA;&#xA;Length([Departure Time]) = 1 then &quot;00&quot; + &quot;:&quot; + &quot;0&quot;+ [Departure Time] + &quot;:00&quot; elseif&#xA;&#xA;Length([Departure Time]) = 2 then &quot;00&quot; + &quot;:&quot; +  [Departure Time] + &quot;:00&quot; &#xA;&#xA;else Null() endif	&#xA;" field="dept_time_str" size="1073741823" type="V_WString" />
+                <FormulaField expression="&#xA;if Length([Arrival Time]) = 3 then &quot;0&quot; + Left([Arrival Time], 1) + &quot;:&quot; + Right([Arrival Time], 2) + &quot;:00&quot; elseif&#xA;&#xA;Length([Arrival Time]) = 4 then Left([Arrival Time], 2) + &quot;:&quot; + Right([Arrival Time], 2) + &quot;:00&quot; elseif&#xA;&#xA;Length([Arrival Time]) = 1 then &quot;00&quot; + &quot;:&quot; + &quot;0&quot;+ [Arrival Time] + &quot;:00&quot; elseif&#xA;&#xA;Length([Arrival Time]) = 2 then &quot;00&quot; + &quot;:&quot; +  [Arrival Time] + &quot;:00&quot; &#xA;&#xA;else Null() endif	&#xA;" field="arr_time_str" size="1073741823" type="V_WString" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>dept_time_str = 
+if Length([Departure Time]) = 3 then  "0" + Left([Departure Tim...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="99">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="297" y="559" width="276" height="60" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text><![CDATA[4.Checking travel time to each potential venue ]]></Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="100">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+            <Position x="80" y="750" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Passwords />
+              <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="25">C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Airport Data$`</File>
+              <FormatSpecificOptions>
+                <FirstRowData>False</FirstRowData>
+                <ImportLine>1</ImportLine>
+              </FormatSpecificOptions>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>DATA.xlsx
+Query=`Airport Data$`</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <Dependencies>
+              <Implicit />
+            </Dependencies>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="Airline Code" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Airport Data$`" type="V_String" />
+                <Field name="Airline" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Airport Data$`" type="V_String" />
+                <Field name="Departing Airport" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Airport Data$`" type="V_String" />
+                <Field name="Departing City" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Airport Data$`" type="V_String" />
+                <Field name="Destination Airport" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Airport Data$`" type="V_String" />
+                <Field name="Destination City" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Airport Data$`" type="V_String" />
+                <Field name="Departure Time" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Airport Data$`" type="V_String" />
+                <Field name="Arrival Time" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Airport Data$`" type="V_String" />
+                <Field name="Avg_MARKET_FARE" source="File: C:\Users\antar\OneDrive\Documents\HackTX\DATA.xlsx|||`Airport Data$`" type="Double" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+        </Node>
+        <Node ToolID="101">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="837" y="741" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="&quot;2023-01-01 &quot;+ [dept_time_str]&#xA;" field="Dept_DateTime" size="1073741823" type="V_WString" />
+                <FormulaField expression="if [dept_time_str]&lt; [arr_time_str] then&#xA;(&quot;2023-01-01 &quot;+ [arr_time_str] )&#xA;elseif &#xA;[dept_time_str]&gt; [arr_time_str] then&#xA;(&quot;2023-01-02 &quot;+ [arr_time_str] )&#xA;else Null() endif	&#xA;" field="Arr_DateTime" size="1073741823" type="V_WString" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>Dept_DateTime = "2023-01-01 "+ [dept_time_str]
+
+Arr_DateTime = if [dept_time_str...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="102">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DbFileInput.DbFileInput">
+            <Position x="81" y="632" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Passwords />
+              <File OutputFileName="" RecordLimit="" SearchSubDirs="False" FileFormat="25">C:\Users\antar\OneDrive\Documents\HackTX\Timezones.xlsx|||`Timezones$`</File>
+              <FormatSpecificOptions>
+                <FirstRowData>False</FirstRowData>
+                <ImportLine>1</ImportLine>
+              </FormatSpecificOptions>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>Timezones.xlsx
+Query=`Timezones$`</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+            <Dependencies>
+              <Implicit />
+            </Dependencies>
+            <MetaInfo connection="Output">
+              <RecordInfo>
+                <Field name="State" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\Timezones.xlsx|||`Timezones$`" type="V_String" />
+                <Field name="Timezone" size="255" source="File: C:\Users\antar\OneDrive\Documents\HackTX\Timezones.xlsx|||`Timezones$`" type="V_String" />
+              </RecordInfo>
+            </MetaInfo>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDbFileInput" />
+        </Node>
+        <Node ToolID="103">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.TextToColumns.TextToColumns">
+            <Position x="175" y="630" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Field>State</Field>
+              <ErrorHandling>Ignore</ErrorHandling>
+              <RootName>State Code</RootName>
+              <Delimeters value="()" />
+              <NumFields value="2" />
+              <Flags value="0" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextToColumns" />
+        </Node>
+        <Node ToolID="104">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.TextToColumns.TextToColumns">
+            <Position x="177" y="751" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Field>Departing City</Field>
+              <ErrorHandling>Last</ErrorHandling>
+              <RootName>Departing City/State</RootName>
+              <Delimeters value="," />
+              <NumFields value="2" />
+              <Flags value="0" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextToColumns" />
+        </Node>
+        <Node ToolID="105">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.TextToColumns.TextToColumns">
+            <Position x="272" y="751" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Field>Destination City</Field>
+              <ErrorHandling>Last</ErrorHandling>
+              <RootName>Destination City/State</RootName>
+              <Delimeters value="," />
+              <NumFields value="2" />
+              <Flags value="0" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxTextToColumns" />
+        </Node>
+        <Node ToolID="106">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="440" y="751" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Airline Code" selected="False" />
+                <SelectField field="Airline" selected="False" />
+                <SelectField field="Departing City" selected="True" rename="Departing City &amp; State" />
+                <SelectField field="Destination City" selected="True" rename="Destination City &amp;State" />
+                <SelectField field="Departing City/State1" selected="True" rename="Departing City" />
+                <SelectField field="Departing City/State2" selected="True" rename="Departing State" />
+                <SelectField field="Destination City/State1" selected="True" rename="Destination City" />
+                <SelectField field="Destination City/State2" selected="True" rename="Destination State" />
+                <SelectField field="*Unknown" selected="True" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="107">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="633" y="752" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="if  CompareDictionary([dept_time_str], &quot;24:00:00&quot;) ==0 then &quot;00:00:00&quot; else [dept_time_str] endif&#xA;" field="dept_time_str" size="1073741823" type="V_WString" />
+                <FormulaField expression="if  CompareDictionary([arr_time_str], &quot;24:00:00&quot;) ==0 then &quot;00:00:00&quot; else [arr_time_str] endif&#xA;" field="arr_time_str" size="1073741823" type="V_WString" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>dept_time_str = if  CompareDictionary([dept_time_str], "24:00:00") ==0 then "00:...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="108">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+            <Position x="1029" y="561" />
+          </GuiSettings>
+          <Properties>
+            <Configuration joinByRecordPos="False">
+              <JoinInfo connection="Left">
+                <Field field="Departing State" />
+              </JoinInfo>
+              <JoinInfo connection="Right">
+                <Field field="State Code2" />
+              </JoinInfo>
+              <SelectConfiguration>
+                <Configuration outputConnection="Join">
+                  <OrderChanged value="False" />
+                  <CommaDecimal value="False" />
+                  <SelectFields>
+                    <SelectField field="Right_Timezone" selected="True" input="Right_" type="Int64" size="8" />
+                    <SelectField field="*Unknown" selected="True" />
+                  </SelectFields>
+                </Configuration>
+              </SelectConfiguration>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+        </Node>
+        <Node ToolID="109">
+          <GuiSettings>
+            <Position x="273" y="631" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Value name="Check Box (135)">False</Value>
+              <Value name="Check Box (136)">False</Value>
+              <Value name="List Box (11)">"State","Timezone","State Code1","State Code2"</Value>
+              <Value name="Check Box (84)">True</Value>
+              <Value name="Check Box (117)">True</Value>
+              <Value name="Check Box (15)">True</Value>
+              <Value name="Check Box (109)">False</Value>
+              <Value name="Check Box (122)">False</Value>
+              <Value name="Check Box (53)">False</Value>
+              <Value name="Check Box (58)">False</Value>
+              <Value name="Check Box (70)">False</Value>
+              <Value name="Check Box (77)">False</Value>
+              <Value name="Drop Down (81)">upper</Value>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <Dependencies>
+              <Implicit>
+                <Dependency Path="_externals\1\Cleanse.yxmc" Package="True" IsMacro="True" IsOutput="False" IsAlias="False" />
+              </Implicit>
+            </Dependencies>
+          </Properties>
+          <EngineSettings Macro="_externals\1\Cleanse.yxmc" />
+        </Node>
+        <Node ToolID="110">
+          <GuiSettings>
+            <Position x="357" y="753" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Value name="Check Box (135)">True</Value>
+              <Value name="Check Box (136)">False</Value>
+              <Value name="List Box (11)">"Airline Code","Airline","Departing Airport","Departing City","Destination Airport","Destination City","Departure Time","Arrival Time","Avg_MARKET_FARE","Departing City/State1","Departing City/State2","Destination City/State1","Destination City/State2"</Value>
+              <Value name="Check Box (84)">False</Value>
+              <Value name="Check Box (117)">False</Value>
+              <Value name="Check Box (15)">True</Value>
+              <Value name="Check Box (109)">False</Value>
+              <Value name="Check Box (122)">False</Value>
+              <Value name="Check Box (53)">False</Value>
+              <Value name="Check Box (58)">False</Value>
+              <Value name="Check Box (70)">False</Value>
+              <Value name="Check Box (77)">False</Value>
+              <Value name="Drop Down (81)">upper</Value>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+            <Dependencies>
+              <Implicit>
+                <Dependency Path="_externals\1\Cleanse.yxmc" Package="True" IsMacro="True" IsOutput="False" IsAlias="False" />
+              </Implicit>
+            </Dependencies>
+          </Properties>
+          <EngineSettings Macro="_externals\1\Cleanse.yxmc" />
+        </Node>
+        <Node ToolID="111">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="1101" y="561" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="DateTimeAdd ([Dept_DateTime], [Timezone], &quot;hours&quot; )" field="Departure_Updated" size="19" type="DateTime" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText><![CDATA[Departure_Updated = DateTimeAdd ([Dept_DateTime], [Timezone], "hours" )
+]]></DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="112">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+            <Position x="1053" y="765" />
+          </GuiSettings>
+          <Properties>
+            <Configuration joinByRecordPos="False">
+              <JoinInfo connection="Left">
+                <Field field="Destination State" />
+              </JoinInfo>
+              <JoinInfo connection="Right">
+                <Field field="State Code2" />
+              </JoinInfo>
+              <SelectConfiguration>
+                <Configuration outputConnection="Join">
+                  <OrderChanged value="False" />
+                  <CommaDecimal value="False" />
+                  <SelectFields>
+                    <SelectField field="Right_Timezone" selected="True" input="Right_" type="Int64" size="8" />
+                    <SelectField field="*Unknown" selected="True" />
+                  </SelectFields>
+                </Configuration>
+              </SelectConfiguration>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+        </Node>
+        <Node ToolID="113">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="1137" y="765" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="DateTimeAdd ([Arr_DateTime], [Timezone], &quot;hours&quot; )" field="Arrival_Updated" size="19" type="DateTime" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText><![CDATA[Arrival_Updated = DateTimeAdd ([Arr_DateTime], [Timezone], "hours" )
+]]></DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="114">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Join.Join">
+            <Position x="1329" y="681" />
+          </GuiSettings>
+          <Properties>
+            <Configuration joinByRecordPos="False">
+              <JoinInfo connection="Left">
+                <Field field="Departing Airport" />
+                <Field field="Destination Airport" />
+                <Field field="Departing City &amp; State" />
+                <Field field="Destination City &amp;State" />
+                <Field field="Departure Time" />
+                <Field field="Arrival Time" />
+                <Field field="Avg_MARKET_FARE" />
+              </JoinInfo>
+              <JoinInfo connection="Right">
+                <Field field="Departing Airport" />
+                <Field field="Destination Airport" />
+                <Field field="Departing City &amp; State" />
+                <Field field="Destination City &amp;State" />
+                <Field field="Departure Time" />
+                <Field field="Arrival Time" />
+                <Field field="Avg_MARKET_FARE" />
+              </JoinInfo>
+              <SelectConfiguration>
+                <Configuration outputConnection="Join">
+                  <OrderChanged value="False" />
+                  <CommaDecimal value="False" />
+                  <SelectFields>
+                    <SelectField field="Right_Departing Airport" selected="True" rename="Right_Departing Airport" input="Right_" />
+                    <SelectField field="Right_Departing City &amp; State" selected="True" rename="Right_Departing City &amp; State" input="Right_" />
+                    <SelectField field="Right_Destination Airport" selected="True" rename="Right_Destination Airport" input="Right_" />
+                    <SelectField field="Right_Destination City &amp;State" selected="True" rename="Right_Destination City &amp;State" input="Right_" />
+                    <SelectField field="Right_Departure Time" selected="True" rename="Right_Departure Time" input="Right_" />
+                    <SelectField field="Right_Arrival Time" selected="True" rename="Right_Arrival Time" input="Right_" />
+                    <SelectField field="Right_Avg_MARKET_FARE" selected="True" rename="Right_Avg_MARKET_FARE" input="Right_" />
+                    <SelectField field="Right_Departing City" selected="True" rename="Right_Departing City" input="Right_" />
+                    <SelectField field="Right_Departing State" selected="True" rename="Right_Departing State" input="Right_" />
+                    <SelectField field="Right_Destination City" selected="True" rename="Right_Destination City" input="Right_" />
+                    <SelectField field="Right_Destination State" selected="True" rename="Right_Destination State" input="Right_" />
+                    <SelectField field="Right_dept_time_str" selected="True" rename="Right_dept_time_str" input="Right_" />
+                    <SelectField field="Right_arr_time_str" selected="True" rename="Right_arr_time_str" input="Right_" />
+                    <SelectField field="Right_Dept_DateTime" selected="True" rename="Right_Dept_DateTime" input="Right_" />
+                    <SelectField field="Right_Arr_DateTime" selected="True" rename="Right_Arr_DateTime" input="Right_" />
+                    <SelectField field="Right_State" selected="True" rename="Right_State" input="Right_" />
+                    <SelectField field="Right_Timezone" selected="True" rename="Right_Timezone" input="Right_" />
+                    <SelectField field="Right_State Code1" selected="True" rename="Right_State Code1" input="Right_" />
+                    <SelectField field="Right_State Code2" selected="True" rename="Right_State Code2" input="Right_" />
+                    <SelectField field="Right_Airline Code" selected="False" rename="Right_Airline Code" input="Right_" />
+                    <SelectField field="Right_Airline" selected="False" rename="Right_Airline" input="Right_" />
+                    <SelectField field="*Unknown" selected="True" />
+                  </SelectFields>
+                </Configuration>
+              </SelectConfiguration>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxJoin" />
+        </Node>
+        <Node ToolID="115">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Formula.Formula">
+            <Position x="1425" y="681" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <FormulaFields>
+                <FormulaField expression="abs(DateTimeDiff([Departure_Updated],[Arrival_Updated],&quot;Minutes&quot;))" field="Travel Time in Minutes" size="1073741823" type="V_WString" />
+              </FormulaFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>Travel Time in Minutes = abs(DateTimeDiff([Departure_Updated],[Arrival_Updated],...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFormula" />
+        </Node>
+        <Node ToolID="116">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+            <Position x="1233" y="597" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Expression>Contains([Departing State],"PR")
+OR Contains([Departing State],"TT")
+OR Contains([Departing State],"VI")
+or Contains([Destination State],"VI")
+OR Contains([Destination State],"PR")
+OR Contains([Destination State],"TT")</Expression>
+              <Mode>Custom</Mode>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>Contains([Departing State],"PR")
+OR Contains([Departing State],"TT")
+OR Contains...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+        </Node>
+        <Node ToolID="117">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+            <Position x="1233" y="765" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Expression>Contains([Departing State],"PR")
+OR Contains([Departing State],"TT")
+OR Contains([Departing State],"VI")
+or Contains([Destination State],"VI")
+OR Contains([Destination State],"PR")
+OR Contains([Destination State],"TT")</Expression>
+              <Mode>Custom</Mode>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>Contains([Departing State],"PR")
+OR Contains([Departing State],"TT")
+OR Contains...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+        </Node>
+        <Node ToolID="118">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+            <Position x="741" y="753" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Expression>!IsNull([dept_time_str]) and !IsNull([arr_time_str])</Expression>
+              <Mode>Custom</Mode>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>!IsNull([dept_time_str]) and !IsNull([arr_time_str])</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+        </Node>
+        <Node ToolID="120">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.AlteryxSelect.AlteryxSelect">
+            <Position x="1495" y="632" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <OrderChanged value="False" />
+              <CommaDecimal value="False" />
+              <SelectFields>
+                <SelectField field="Departure Time" selected="True" />
+                <SelectField field="Arrival Time" selected="True" />
+                <SelectField field="Departing State" selected="True" />
+                <SelectField field="Destination State" selected="True" />
+                <SelectField field="Departure_Updated" selected="True" />
+                <SelectField field="Arrival_Updated" selected="True" />
+                <SelectField field="Travel Time in Minutes" selected="True" />
+                <SelectField field="Travel Time in Hours" selected="False" type="Double" size="8" />
+                <SelectField field="*Unknown" selected="False" />
+              </SelectFields>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxSelect" />
+        </Node>
+        <Node ToolID="124">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.DateTime.DateTime">
+            <Position x="1602" y="691" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <IsFrom value="True" />
+              <InputFieldName>Departure_Updated</InputFieldName>
+              <Language>English</Language>
+              <Format>hh:mm:ss</Format>
+              <OutputFieldName>Departure_Hour</OutputFieldName>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>Convert Departure_Updated To:
+Custom</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxDateTime" />
+        </Node>
+        <Node ToolID="137">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="534" y="930" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Converting 1,2,3,4 digit values of departure and arrival time into a standard format of hh:mm:ss</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="138">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="666" y="930" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Converting 24:00:00 values to 00:00:00 for departure and arrival time</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="139">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="858" y="919" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Converting to a standard datetime format and handling date values for same and next day arrivals</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="140">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="1098" y="703" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Handling time zone conversions for departing state</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="141">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="1122" y="919" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Handling time zone conversions for destination state</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="142">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="1398" y="871" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Calculating Travel time</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+        <Node ToolID="127">
+          <GuiSettings Plugin="AlteryxBasePluginsGui.Filter.Filter">
+            <Position x="1734" y="691" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Expression><![CDATA[DateTimeParse(ToString('2000-01-01 ' +[Departure_Hour]),'%Y-%m-%d %H:%M:%S') >= '2000-01-01 18:00:00' and DateTimeParse(ToString('2000-01-01 ' +[Departure_Hour]),'%Y-%m-%d %H:%M:%S') <= '2000-01-01 23:59:59'
+]]></Expression>
+              <Mode>Custom</Mode>
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText>DateTimeParse(ToString('2000-01-01 ' +[Departure_Hour]),'%Y-%m-%d %H:%M:%S') &gt;= ...</DefaultAnnotationText>
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+          <EngineSettings EngineDll="AlteryxBasePluginsEngine.dll" EngineDllEntryPoint="AlteryxFilter" />
+        </Node>
+        <Node ToolID="143">
+          <GuiSettings Plugin="AlteryxGuiToolkit.TextBox.TextBox">
+            <Position x="1734" y="871" width="100" height="40" />
+          </GuiSettings>
+          <Properties>
+            <Configuration>
+              <Text>Selecting only flight details which has departure time between 18:00:00 and 23:59:59 to minimize time away from revenue-generating work while not expecting employees to travel in the middle of the night</Text>
+              <Font name="Arial" size="8.25" style="0" />
+              <TextColor name="Black" />
+              <FillColor name="White" />
+              <Shape shape="0" />
+              <Justification Justification="4" />
+            </Configuration>
+            <Annotation DisplayMode="0">
+              <Name />
+              <DefaultAnnotationText />
+              <Left value="False" />
+            </Annotation>
+          </Properties>
+        </Node>
+      </ChildNodes>
+    </Node>
+  </Nodes>
+  <Connections>
+    <Connection>
+      <Origin ToolID="8" Connection="Join" />
+      <Destination ToolID="12" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="8" Connection="Join" />
+      <Destination ToolID="13" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="12" Connection="Output" />
+      <Destination ToolID="13" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="9" Connection="Output" />
+      <Destination ToolID="130" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="13" Connection="Join" />
+      <Destination ToolID="15" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="15" Connection="Output" />
+      <Destination ToolID="94" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="16" Connection="Output" />
+      <Destination ToolID="17" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="17" Connection="Output" />
+      <Destination ToolID="132" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="94" Connection="Output" />
+      <Destination ToolID="95" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="95" Connection="Output" />
+      <Destination ToolID="16" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="130" Connection="True" />
+      <Destination ToolID="8" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="1" Connection="Join" />
+      <Destination ToolID="8" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="2" Connection="Output" />
+      <Destination ToolID="10" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="3" Connection="Output" />
+      <Destination ToolID="145" Connection="Targets" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="146" Connection="Output" />
+      <Destination ToolID="145" Connection="Source" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="4" Connection="Output" />
+      <Destination ToolID="5" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="145" Connection="Output" />
+      <Destination ToolID="5" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="5" Connection="Join" />
+      <Destination ToolID="1" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="149" Connection="Output" />
+      <Destination ToolID="1" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="10" Connection="True" />
+      <Destination ToolID="3" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="97" Connection="Output" />
+      <Destination ToolID="107" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="100" Connection="Output" />
+      <Destination ToolID="104" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="101" Connection="Output" />
+      <Destination ToolID="108" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="109" Connection="Output26" />
+      <Destination ToolID="108" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="101" Connection="Output" />
+      <Destination ToolID="112" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="109" Connection="Output26" />
+      <Destination ToolID="112" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="102" Connection="Output" />
+      <Destination ToolID="103" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="103" Connection="Output" />
+      <Destination ToolID="109" Connection="Input2" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="104" Connection="Output" />
+      <Destination ToolID="105" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="105" Connection="Output" />
+      <Destination ToolID="110" Connection="Input2" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="106" Connection="Output" />
+      <Destination ToolID="97" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="107" Connection="Output" />
+      <Destination ToolID="118" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="108" Connection="Join" />
+      <Destination ToolID="111" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="110" Connection="Output26" />
+      <Destination ToolID="106" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="111" Connection="Output" />
+      <Destination ToolID="116" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="112" Connection="Join" />
+      <Destination ToolID="113" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="113" Connection="Output" />
+      <Destination ToolID="117" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="114" Connection="Join" />
+      <Destination ToolID="115" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="115" Connection="Output" />
+      <Destination ToolID="120" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="115" Connection="Output" />
+      <Destination ToolID="124" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="116" Connection="False" />
+      <Destination ToolID="114" Connection="Left" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="117" Connection="False" />
+      <Destination ToolID="114" Connection="Right" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="118" Connection="True" />
+      <Destination ToolID="101" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="124" Connection="Output" />
+      <Destination ToolID="127" Connection="Input" />
+    </Connection>
+    <Connection>
+      <Origin ToolID="127" Connection="True" />
+      <Destination ToolID="149" Connection="Input" />
+    </Connection>
+  </Connections>
+  <Properties>
+    <Memory default="True" />
+    <GlobalRecordLimit value="0" />
+    <TempFiles default="True" />
+    <Annotation on="True" includeToolName="False" />
+    <ConvErrorLimit value="10" />
+    <ConvErrorLimit_Stop value="False" />
+    <CancelOnError value="False" />
+    <DisableBrowse value="False" />
+    <EnablePerformanceProfiling value="False" />
+    <RunWithE2 value="True" />
+    <PredictiveToolsCodePage value="1252" />
+    <DisableAllOutput value="False" />
+    <ShowAllMacroMessages value="False" />
+    <ShowConnectionStatusIsOn value="True" />
+    <ShowConnectionStatusOnlyWhenRunning value="True" />
+    <ZoomLevel value="0" />
+    <LayoutType>Horizontal</LayoutType>
+    <MetaInfo>
+      <NameIsFileName value="True" />
+      <Name>Co-Op Buddy Flow</Name>
+      <Description />
+      <RootToolName />
+      <ToolVersion />
+      <ToolInDb value="False" />
+      <CategoryName />
+      <SearchTags />
+      <Author />
+      <Company />
+      <Copyright />
+      <DescriptionLink actual="" displayed="" />
+      <Example>
+        <Description />
+        <File />
+      </Example>
+      <WorkflowId value="93aa90e8-67aa-4bb5-9429-10b623e246b7" />
+      <Telemetry>
+        <PreviousWorkflowId value="bab11848-e660-4da6-97ab-32549fcd432a" />
+        <OriginWorkflowId value="bab11848-e660-4da6-97ab-32549fcd432a" />
+      </Telemetry>
+      <PlatformWorkflowId value="" />
+    </MetaInfo>
+    <Events>
+      <Enabled value="True" />
+    </Events>
+  </Properties>
+</AlteryxDocument>
